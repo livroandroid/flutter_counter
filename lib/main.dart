@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_counter/home_page.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 void main() => runApp(MyApp());
 

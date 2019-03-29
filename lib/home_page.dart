@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_counter/counter_bloc.dart';
 import 'package:flutter_counter/counter_page.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);

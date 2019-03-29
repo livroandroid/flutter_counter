@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:rxdart/rxdart.dart';
 final counterBloc = CounterBloc();
 
 class CounterBloc {
@@ -14,10 +14,8 @@ class CounterBloc {
 
   int _counter = 0;
 
-  final _controller = StreamController<int>.broadcast();
+  final _controller = BehaviorSubject<int>();
   get stream => _controller.stream;
-
-  get counter => _counter;
 
   void increment() {
     _counter++;

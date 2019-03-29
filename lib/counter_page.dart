@@ -16,7 +16,6 @@ class _CounterPageState extends State<CounterPage> {
       ),
       body: Center(
         child: StreamBuilder<int>(
-          initialData: counterBloc.counter,
           stream: counterBloc.stream,
           builder: (context, snapshot) {
             int count = snapshot.hasData ? snapshot.data : 0;
