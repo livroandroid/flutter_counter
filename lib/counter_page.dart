@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_counter/counter_bloc.dart';
+import 'package:flutter_counter/bloc_provider.dart';
 
 class CounterPage extends StatefulWidget {
   @override
@@ -10,6 +10,8 @@ class _CounterPageState extends State<CounterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final counterBloc = BlocProvider.of(context).bloc;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Counter"),
@@ -28,10 +30,5 @@ class _CounterPageState extends State<CounterPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

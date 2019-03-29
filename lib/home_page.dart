@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_counter/bloc_provider.dart';
 import 'package:flutter_counter/counter_bloc.dart';
 import 'package:flutter_counter/counter_page.dart';
 
@@ -15,6 +16,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final counterBloc = BlocProvider.of(context).bloc;
+
     print("build");
     return Scaffold(
       appBar: AppBar(
@@ -53,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onClickIncrement() {
+    final counterBloc = BlocProvider.of(context).bloc;
     counterBloc.increment();
   }
 
@@ -65,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void dispose() {
     super.dispose();
+    final counterBloc = BlocProvider.of(context).bloc;
     counterBloc.close();
   }
 }
