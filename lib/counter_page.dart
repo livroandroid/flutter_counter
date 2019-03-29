@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_counter/bloc_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_counter/counter_bloc.dart';
 
 class CounterPage extends StatefulWidget {
   @override
@@ -10,23 +11,23 @@ class _CounterPageState extends State<CounterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final counterBloc = BlocProvider.of(context).bloc;
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Counter"),
       ),
       body: Center(
-        child: StreamBuilder<int>(
-          stream: counterBloc.stream,
-          builder: (context, snapshot) {
-            int count = snapshot.hasData ? snapshot.data : 0;
-            print("> $count");
-            return Text(
-              '$count',
-              style: Theme.of(context).textTheme.display1,
-            );
-          },
+        child: BlocBuilder<CounterEvent, int>(
+            bloc: counterBloc,
+            builder: (context, int state) {
+              int count = state;
+              print("> $count");
+              return Text(
+                '$count',
+                style: Theme.of(context).textTheme.display1,
+              );
+            }
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_counter/bloc_provider.dart';
 import 'package:flutter_counter/counter_bloc.dart';
 import 'package:flutter_counter/counter_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -13,10 +13,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-    final counterBloc = BlocProvider.of(context).bloc;
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
 
     print("build");
     return Scaffold(
@@ -32,17 +31,17 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(
                 'You have pushed the button this many times:',
               ),
-              StreamBuilder<int>(
-                stream: counterBloc.stream,
-                builder: (context, snapshot) {
-                  int count = snapshot.hasData ? snapshot.data : 0;
+              BlocBuilder<CounterEvent, int>(
+                bloc: counterBloc,
+                builder: (context, int state) {
+                  int count = state;
                   print("> $count");
                   return Text(
                     '$count',
                     style: Theme.of(context).textTheme.display1,
                   );
                 },
-              ),
+              )
             ],
           ),
         ),
@@ -56,7 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onClickIncrement() {
-    final counterBloc = BlocProvider.of(context).bloc;
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
+//    counterBloc.dispatch(CounterEvent.increment);
     counterBloc.increment();
   }
 
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void dispose() {
     super.dispose();
-    final counterBloc = BlocProvider.of(context).bloc;
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
     counterBloc.close();
   }
 }
