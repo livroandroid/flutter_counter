@@ -1,12 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:rxdart/rxdart.dart';
 
 enum CounterEvent { increment, decrement }
 
 class CounterBloc extends Bloc<CounterEvent, int> {
-
-  final _controller = BehaviorSubject<int>();
-  get stream => _controller.stream;
 
   @override
   int get initialState => 0;
@@ -25,9 +21,5 @@ class CounterBloc extends Bloc<CounterEvent, int> {
 
   void increment() {
     dispatch(CounterEvent.increment);
-  }
-
-  void close() {
-    _controller.close();
   }
 }

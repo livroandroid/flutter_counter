@@ -65,11 +65,4 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (context) => CounterPage(),
     ));
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-    final counterBloc = BlocProvider.of<CounterBloc>(context);
-    counterBloc.close();
-  }
 }
