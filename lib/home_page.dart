@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_counter/counter_model.dart';
 import 'package:flutter_counter/counter_page.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -13,6 +11,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(
                 'You have pushed the button this many times:',
               ),
-              ScopedModelDescendant<CounterModel>(
-                builder: (context, child, model) {
-                  int count = model.counter;
-                  print("> $count");
-                  return Text(
-                    '$count',
-                    style: Theme.of(context).textTheme.display1,
-                  );
-                },
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.display1,
               ),
             ],
           ),
@@ -53,13 +46,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onClickIncrement() {
-    final model = CounterModel.of(context);
-    model.increment();
+    setState(() {
+      _counter++;
+    });
   }
 
   void _onClickCounter() {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => CounterPage(),
-    ));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => CounterPage()));
   }
 }
