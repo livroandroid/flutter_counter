@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_counter/counter_bloc.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 class CounterPage extends StatefulWidget {
   @override
@@ -8,7 +7,6 @@ class CounterPage extends StatefulWidget {
 }
 
 class _CounterPageState extends State<CounterPage> {
-  final CounterBloc _bloc = CounterBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +16,13 @@ class _CounterPageState extends State<CounterPage> {
       ),
       body: Center(
         child: StreamBuilder<int>(
-          stream: _bloc.stream,
+          initialData: counterBloc.counter,
+          stream: counterBloc.stream,
           builder: (context, snapshot) {
             int count = snapshot.hasData ? snapshot.data : 0;
             print("> $count");
             return Text(
-              'Este counter não funciona.\nVeja próxima aula. $count',
+              '$count',
               style: Theme.of(context).textTheme.display1,
             );
           },
@@ -35,6 +34,5 @@ class _CounterPageState extends State<CounterPage> {
   @override
   void dispose() {
     super.dispose();
-    _bloc.close();
   }
 }

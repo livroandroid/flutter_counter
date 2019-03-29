@@ -14,8 +14,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  final CounterBloc _bloc = CounterBloc();
-
   @override
   Widget build(BuildContext context) {
     print("build");
@@ -33,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 'You have pushed the button this many times:',
               ),
               StreamBuilder<int>(
-                stream: _bloc.stream,
+                stream: counterBloc.stream,
                 builder: (context, snapshot) {
                   int count = snapshot.hasData ? snapshot.data : 0;
                   print("> $count");
@@ -56,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onClickIncrement() {
-    _bloc.increment();
+    counterBloc.increment();
   }
 
   void _onClickCounter() {
@@ -68,6 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void dispose() {
     super.dispose();
-    _bloc.close();
+    counterBloc.close();
   }
 }
