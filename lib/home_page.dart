@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_counter/counter_page.dart';
+import 'package:flutter_counter/redux/actions.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -29,9 +31,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(
                 'You have pushed the button this many times:',
               ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.display1,
+              StoreConnector<int, int>(
+                converter: (store) => store.state,
+                builder: (context, count) {
+                  return Text(
+                    "$count",
+                    style: Theme.of(context).textTheme.display1,
+                  );
+                },
               ),
             ],
           ),
@@ -46,9 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onClickIncrement() {
-    setState(() {
-      _counter++;
-    });
+    final store = StoreProvider.of<int>(context);
+    store.dispatch(CounterActions.Increment);
   }
 
   void _onClickCounter() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class CounterPage extends StatefulWidget {
   @override
@@ -13,10 +14,15 @@ class _CounterPageState extends State<CounterPage> {
         title: Text("Counter"),
       ),
       body: Center(
-        child: Text(
-        'Como mostrar o counter aqui?',
-        style: Theme.of(context).textTheme.display1,
-      ),
+        child: StoreConnector<int, int>(
+          converter: (store) => store.state,
+          builder: (context, count) {
+            return Text(
+              "$count",
+              style: Theme.of(context).textTheme.display1,
+            );
+          },
+        ),
       ),
     );
   }
