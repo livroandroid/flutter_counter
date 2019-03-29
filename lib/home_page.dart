@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_counter/counter_page.dart';
-import 'package:flutter_counter/redux/actions.dart';
+import 'package:flutter_counter/redux/counter_actions.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 class MyHomePage extends StatefulWidget {
